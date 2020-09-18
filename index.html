@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Web1 - Welcome</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <!-- <script src="colors.js"></script> -->
+   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
+   <meta name="google-signin-client_id" content="585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com"> -->
+   <script>
+      function checkLoginStatus() {
+         var loginBtn = document.querySelector('#loginBtn')
+         if(gauth.isSignedIn.get()){
+            console.log('logged in')
+            loginBtn.value = 'Logout'
+         } else {
+            console.log('logged out')
+            loginBtn.value = 'Login'
+         }
+      }
+      function init() {
+         gapi.load('auth2', function() {
+            window.gauth = gapi.auth2.init({
+               client_id:'585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com'
+            })
+            gauth.then(function(){
+               console.log('goolgeAuth success')
+               checkLoginStatus();
+            }, function() {
+               console.log('googleAuth failed')
+            })
+         })
+      }
+   </script>
+   <!-- <script>
+      function onSignIn(googleUser) {
+         var profile = googleUser.getBasicProfile();
+         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+         console.log('Name: ' + profile.getName());
+         console.log('Image URL: ' + profile.getImageUrl());
+         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
+   </script> -->
+</head>
+<body>
+   <input type="button" id="loginBtn" value="checking ..." onclick="
+      if(this.value==='Login') {
+         gauth.signIn().then(function() {
+            console.log('gauth.signIn()')
+            checkLoginStatus();
+         })
+      } else {
+         gauth.signOut().then(function() {
+            console.log('gauth.signOut()')
+            checkLoginStatus();
+         })
+      }
+   ">
+   <div class="g-signin2" data-onsuccess="onSignIn"></div>
+   <h1><a href="index.html">WEB</a></h1>
+   <input id="night_day" type="button" value="night" onclick="nightDayHandler(this)">
+   <ol>
+      <li><a href="1.html">HTML</a></li>
+      <li><a href="2.html">CSS</a></li>
+      <li><a href="3.html">JavaScript</a></li>
+   </ol>
+   <h2>WEB</h2> 
+   <p>
+      The World Wide Web (abbreviated WWW or the Web) is an information space where documents and other web resources are identified by Uniform Resource Locators (URLs), interlinked by hypertext links, ...
+   </p>
+   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>
