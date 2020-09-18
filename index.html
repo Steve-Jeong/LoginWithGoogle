@@ -56,6 +56,9 @@
             checkLoginStatus();
          })
       }
+      // checkLoginStatus();  // 앞의 checkLoginStatus는 callBack함수 안에 
+      //                      // 있는 것이므로 왼쪽과 같이 callBack밖에 위치하면
+      //                      // async특성때문에 의도한대로 동작하지 않는다.
    ">
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
    <h1><a href="index.html">WEB</a></h1>
