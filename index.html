@@ -5,10 +5,9 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Web1 - Welcome</title>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   <!-- <script src="colors.js"></script> -->
-   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
-   <meta name="google-signin-client_id" content="585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com"> -->
-   <script>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+   <meta name="google-signin-client_id" content="585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com">
+   <!-- <script>
       function checkLoginStatus() {
          var loginBtn = document.querySelector('#loginBtn')
          if(gauth.isSignedIn.get()){
@@ -32,19 +31,23 @@
             })
          })
       }
-   </script>
-   <!-- <script>
+   </script> -->
+   <script>
       function onSignIn(googleUser) {
          var profile = googleUser.getBasicProfile();
          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
          console.log('Name: ' + profile.getName());
          console.log('Image URL: ' + profile.getImageUrl());
          console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+         document.querySelector(".g-signin2").hidden = true
+         document.querySelector(".logoutBtn").hidden = false
+         document.querySelector("#welcome").innerHTML = `"Welcome ${profile.getName()}" `
+
       }
-   </script> -->
+   </script>
 </head>
 <body>
-   <input type="button" id="loginBtn" value="checking ..." onclick="
+   <!-- <input type="button" id="loginBtn" value="checking ..." onclick="
       if(this.value==='Login') {
          gauth.signIn().then(function() {
             console.log('gauth.signIn()')
@@ -55,23 +58,34 @@
             console.log('gauth.signOut()')
             checkLoginStatus();
          })
-      }
-      // checkLoginStatus();  // 앞의 checkLoginStatus는 callBack함수 안에 
+      } -->
+      <!-- // checkLoginStatus();  // 앞의 checkLoginStatus는 callBack함수 안에 
       //                      // 있는 것이므로 왼쪽과 같이 callBack밖에 위치하면
       //                      // async특성때문에 의도한대로 동작하지 않는다.
-   ">
+   "> -->
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+   <span id="welcome"></span><a href="#" class="logoutBtn" hidden=true onclick="signOut();">Sign out</a>
    <h1><a href="index.html">WEB</a></h1>
-   <input id="night_day" type="button" value="night" onclick="nightDayHandler(this)">
-   <ol>
+   <ul>
       <li><a href="1.html">HTML</a></li>
       <li><a href="2.html">CSS</a></li>
       <li><a href="3.html">JavaScript</a></li>
-   </ol>
+   </ul>
    <h2>WEB</h2> 
    <p>
       The World Wide Web (abbreviated WWW or the Web) is an information space where documents and other web resources are identified by Uniform Resource Locators (URLs), interlinked by hypertext links, ...
    </p>
-   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+   <!-- <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
+   <script>
+      function signOut() {
+         var auth2 = gapi.auth2.getAuthInstance();
+         auth2.signOut().then(function () {
+            console.log('User signed out.');
+         });
+         document.querySelector(".logoutBtn").hidden = true
+         document.querySelector(".g-signin2").hidden = false
+         document.querySelector("#welcome").innerHTML = ''
+      }
+</script>
 </body>
 </html>
