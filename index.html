@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Google Login using https://developers.google.com/identity/sign-in/web/sign-in -->
 <html lang="en">
 <head>
    <meta charset="UTF-8">
@@ -7,31 +8,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script src="https://apis.google.com/js/platform.js" async defer></script>
    <meta name="google-signin-client_id" content="585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com">
-   <!-- <script>
-      function checkLoginStatus() {
-         var loginBtn = document.querySelector('#loginBtn')
-         if(gauth.isSignedIn.get()){
-            console.log('logged in')
-            loginBtn.value = 'Logout'
-         } else {
-            console.log('logged out')
-            loginBtn.value = 'Login'
-         }
-      }
-      function init() {
-         gapi.load('auth2', function() {
-            window.gauth = gapi.auth2.init({
-               client_id:'585054628304-lqvb95gn4qo8reqml20tp43to6tadmii.apps.googleusercontent.com'
-            })
-            gauth.then(function(){
-               console.log('goolgeAuth success')
-               checkLoginStatus();
-            }, function() {
-               console.log('googleAuth failed')
-            })
-         })
-      }
-   </script> -->
+
    <script>
       function onSignIn(googleUser) {
          var profile = googleUser.getBasicProfile();
@@ -47,22 +24,6 @@
    </script>
 </head>
 <body>
-   <!-- <input type="button" id="loginBtn" value="checking ..." onclick="
-      if(this.value==='Login') {
-         gauth.signIn().then(function() {
-            console.log('gauth.signIn()')
-            checkLoginStatus();
-         })
-      } else {
-         gauth.signOut().then(function() {
-            console.log('gauth.signOut()')
-            checkLoginStatus();
-         })
-      } -->
-      <!-- // checkLoginStatus();  // 앞의 checkLoginStatus는 callBack함수 안에 
-      //                      // 있는 것이므로 왼쪽과 같이 callBack밖에 위치하면
-      //                      // async특성때문에 의도한대로 동작하지 않는다.
-   "> -->
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
    <span id="welcome"></span><a href="#" class="logoutBtn" hidden=true onclick="signOut();">Sign out</a>
    <h1><a href="index.html">WEB</a></h1>
@@ -75,7 +36,7 @@
    <p>
       The World Wide Web (abbreviated WWW or the Web) is an information space where documents and other web resources are identified by Uniform Resource Locators (URLs), interlinked by hypertext links, ...
    </p>
-   <!-- <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
+
    <script>
       function signOut() {
          var auth2 = gapi.auth2.getAuthInstance();
