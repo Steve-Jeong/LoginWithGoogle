@@ -9,12 +9,18 @@
    <script>   
       function checkLoginStatus () {
          var loginBtn = document.querySelector('#loginBtn')
+         var nameTxt = document.querySelector('#name')
          if(gauth.isSignedIn.get()) {
             console.log('Status : Logged In')
             loginBtn.value = 'Logout'
+            var profile = gauth.currentUser.get().getBasicProfile()
+            console.log('Profile : ', profile)
+            console.log('Name : ', profile.getName())
+            nameTxt.innerHTML = `Welcome <strong>${profile.getName()}</strong> `
          } else {
             console.log('Status : Logged Out')
             loginBtn.value = 'Login'
+            nameTxt.innerHTML = ''
          }
       }
 
@@ -38,9 +44,11 @@
 
 </head>
 <body>
-   <input type="button" id="loginBtn" value="Checking..." onclick="
+   <span id="name"></span><input type="button" id="loginBtn" value="Checking..." onclick="
       if(this.value === 'Login') {
-         gauth.signIn().then(function() {
+         gauth.signIn({
+            scope : 'https://www.googleapis.com/auth/calendar'
+         }).then(function() {
             console.log('auth.signIn()')
             checkLoginStatus()
          })
